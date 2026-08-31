@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Calculadora imc</title>
+</head>
+<body>
+    <h1>Calculadora imc</h1>
+    <style>
+    body{
+            text-align: center;
+        }
+    </style>
+    <p>Peso (kg): <input type="number" class="peso" step="0.1"></p>
+    <p>Altura (cm): <input type="number" class="altura"></p>
+    <button onclick="calcular()">Calcular</button>
+
+    <h2 class="resultado"></h2>
+    <img class="imagen" style="display:none; max-width:300px; margin: 0 auto;">
+
+    <script>
+        function calcular() {
+
+            var peso = document.getElementsByClassName("peso")[0].value;
+            var altura = document.getElementsByClassName("altura")[0].value;
+
+            peso = parseFloat(peso);
+            altura = parseFloat(altura) / 100;
+
+            var imc = peso / (altura * altura);
+
+            var categoria;
+            var imagen;
+
+            if (imc < 18.5) {
+                categoria = "INFRAPESO";
+                imagen = "infrapeso.webp";
+            } else if (imc < 25) {
+                categoria = "NORMAL";
+                imagen = "normal.webp";
+            } else if (imc < 30) {
+                categoria = "SOBREPESO";
+                imagen = "sobrepeso.webp";
+            } else {
+                categoria = "OBESIDAD";
+                imagen = "obeso.webp";
+            }
+
+            document.getElementsByClassName("resultado")[0].innerText =
+                "IMC: " + imc.toFixed(1) + " es " + categoria;
+
+            var img = document.getElementsByClassName("imagen")[0];
+            img.src = imagen;
+            img.style.display = "block";
+        }
+    </script>
+</body>
+</html>   
